@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MVVM.Sample.PCL"
+             x:Class="MVVM.Sample.PCL.MainPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <local:AverageToColorConverter x:Key="MyColorCOnverter"/>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <StackLayout>
+    <Button Text="Cargar Directorio"
+            Command="{Binding LoadDirectoryCommand}"/>
+    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                       IsVisible="{Binding IsBusy}"/>
+    <ListView ItemsSource="{Binding Students}" x:Name="lvStudents">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ImageCell Text="{Binding Name}"
+                     Detail="{Binding Average}"
+                     TextColor="{Binding Average, Converter={StaticResource MyColorCOnverter}}"/>
+          
+        </DataTemplate>
+      </ListView.ItemTemplate>
+      
+    </ListView>
+    
+  </StackLayout>
+
+</ContentPage>
